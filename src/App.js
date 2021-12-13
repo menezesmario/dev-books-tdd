@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core";
 import React from 'react';
+import { BookList } from "./components/BookList";
 
 function App() {
   const books = [
@@ -7,20 +8,10 @@ function App() {
     { name: 'Domain-driven design' }
   ];
 
-
-
   return (
     <>
-     <Typography variant="h2" component="h2" data-test="heading">DevBook!</Typography>
-      <div data-test="book-list">
-        {
-          books.map(book => (
-            <div className="book-item">
-              <h2 className="titles">{book.name}</h2>
-            </div>
-          ))
-        }
-      </div>
+      <Typography variant="h2" component="h2" data-test="heading">DevBook!</Typography>
+      <BookList books={books} />
     </>
   );
 }
