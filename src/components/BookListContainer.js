@@ -1,32 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useBookList } from '../hooks/UseBookList';
 import { BookList } from "./BookList";
-import { api } from "../services/api";
 
 export const BookListContainer = () => {
-
-  const [books, setBooks] = useState([])
-  const [loading, setLoading] = useState([false])
-  const [error, setError] = useState([false])
- 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      setLoading(true)
-      setError(false)
-      try {
-        const response = await api.get('books')
-        setBooks(response.data)
-      } catch (err) {
-        setError(true)
-      }finally {
-        setLoading(false)
-      }
-    } 
-    fetchBooks()
-  }, [])
-
+    const {books, loading, error} = useBookList()
   return (
     <>
-      <BookList books={books} />
+      <BookList books={books} loading={loading} error={error} />
     </>
   );
 }
