@@ -6,11 +6,21 @@ import { api } from "./services/api";
 function App() {
 
   const [books, setBooks] = useState([])
-
+  const [loading, setLoading] = useState([false])
+  const [error, setError] = useState([false])
+ 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await api.get('books')
-      setBooks(response.data)
+      setLoading(true)
+      setError(false)
+      try {
+        const response = await api.get('books')
+        setBooks(response.data)
+      } catch (err) {
+        setError(true)
+      }finally {
+        setLoading(false)
+      }
     } 
     fetchBooks()
   }, [])
